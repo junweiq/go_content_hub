@@ -17,12 +17,8 @@ func CmsRouter(r *gin.Engine) {
 	{
 		api.GET("ping", cmsApp.Ping)
 	}
-	authApi := api.Use(session.Auth)
+	cmsApi := api.Group("cms").Use(session.Auth)
 	{
-		authApi.GET("privatePing", cmsApp.PrivatePing)
+		cmsApi.GET("hello", cmsApp.Hello)
 	}
-	//cmsApi := api.Group("cms")
-	//{
-	//	cmsApi.POST("login", cmsApp.Ping)
-	//}
 }

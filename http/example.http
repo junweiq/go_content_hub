@@ -1,0 +1,2 @@
+GET http://localhost:9941/ping
+Accept: application/json

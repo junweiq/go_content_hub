@@ -1,2 +1,2 @@
-GET http://localhost:9941/ping
+GET http://localhost:9941/api/ping
 Accept: application/json

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"go_content_hub/internal/api"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -10,11 +10,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	api.CmsRouter(r)
 
 	port := os.Getenv("PORT")
 	if port == "" {

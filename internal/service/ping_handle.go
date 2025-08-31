@@ -11,3 +11,9 @@ func (c *CmsApp) Ping(ctx *gin.Context) {
 		"message": "pong",
 	})
 }
+
+func (c *CmsApp) PrivatePing(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "private pong",
+	})
+}

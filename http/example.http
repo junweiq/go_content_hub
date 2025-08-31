@@ -1,2 +1,8 @@
-GET http://localhost:9941/api/ping
+### GET ping
+GET {{host}}/{{apiPrefix}}/ping
 Accept: application/json
+
+### GET private ping
+GET {{host}}/{{apiPrefix}}/privatePing
+Accept: application/json
+SID: "123"

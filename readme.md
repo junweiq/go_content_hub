@@ -12,4 +12,5 @@ internal 內部實現邏輯
   service
   util
 pkg      外部包與方法
+script   腳本
 ```

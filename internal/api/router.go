@@ -7,7 +7,8 @@ import (
 )
 
 const (
-	apiPrefix = "api"
+	authApiPrefix = "_api"
+	apiPrefix     = "api"
 )
 
 func CmsRouter(r *gin.Engine) {
@@ -17,8 +18,9 @@ func CmsRouter(r *gin.Engine) {
 	{
 		api.GET("ping", cmsApp.Ping)
 	}
-	cmsApi := api.Group("cms").Use(session.Auth)
+
+	authApi := r.Group(authApiPrefix).Use(session.Auth)
 	{
-		cmsApi.GET("hello", cmsApp.Hello)
+		authApi.GET("cms/hello", cmsApp.Hello)
 	}
 }

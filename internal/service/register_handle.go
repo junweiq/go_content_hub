@@ -1,9 +1,11 @@
 package service
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type RegisterReq struct {
@@ -18,8 +20,15 @@ type RegisterRes struct {
 func (c *CmsApp) Register(ctx *gin.Context) {
 	var req RegisterReq
 
+	hashedPassword, err := encryptPassword(req.Password)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	fmt.Println(hashedPassword)
+
 	//TODO 持久化
-	//TODO 密碼加密
 	//TODO 帳號存在較驗
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -30,4 +39,13 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 		"code": 0,
 		"msg":  "ok",
 	})
+}
+
+func encryptPassword(password string) (string, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		fmt.Printf("bcrypt generate from password error = %v", err)
+		return "", err
+	}
+	return string(hashedPassword), nil
 }

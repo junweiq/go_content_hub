@@ -17,10 +17,10 @@ func NewSessionAuth() *SessionAuth {
 
 func (s *SessionAuth) Auth(ctx *gin.Context) {
 	sessionId := ctx.GetHeader(SessionKey)
-	//TODO
+	//TODO SID 較驗
 	if sessionId == "" {
-		ctx.AbortWithStatusJSON(http.StatusForbidden, "SID is null")
+		ctx.AbortWithStatusJSON(http.StatusForbidden, fmt.Sprintf("%s is null", SessionKey))
 	}
-	fmt.Println("SID = ", sessionId)
+	fmt.Println(fmt.Sprintf("%s =", SessionKey), sessionId)
 	ctx.Next()
 }

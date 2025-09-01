@@ -1,8 +1,3 @@
-### GET ping
-GET {{host}}/{{apiPrefix}}/ping
-Accept: application/json
-
-### GET private ping
 GET {{host}}/{{authApiPrefix}}/cms/hello
 Accept: application/json
 SID: "123"

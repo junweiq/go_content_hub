@@ -1,0 +1,8 @@
+GET {{host}}/{{apiPrefix}}/cms/register
+Accept: application/json
+
+{
+  "username": "frank",
+  "password": "frank",
+  "nickname": "frank"
+}

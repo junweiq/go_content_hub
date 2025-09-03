@@ -12,7 +12,7 @@ const (
 )
 
 func CmsRouter(r *gin.Engine) {
-	cmsApp := service.CmsApp{}
+	cmsApp := service.NewCmsApp()
 	session := NewSessionAuth()
 	api := r.Group(apiPrefix)
 	{

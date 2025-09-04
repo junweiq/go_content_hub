@@ -36,3 +36,16 @@ func (u *UserDao) Create(user *modal.User) error {
 	}
 	return nil
 }
+
+func (u *UserDao) FirstByUsername(username string) (*modal.User, error) {
+	var user modal.User
+	err := u.db.Where("username = ?", username).First(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	}
+	if err != nil {
+		fmt.Printf("UserDao FirstByUsername() error [%v]", err)
+		return nil, err
+	}
+	return &user, nil
+}

@@ -45,8 +45,6 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Println(hashedPassword)
-
 	nowTime := time.Now()
 	if err := userDao.Create(&modal.User{
 		Username:  req.Username,

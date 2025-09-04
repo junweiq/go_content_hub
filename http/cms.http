@@ -1,0 +1,31 @@
+### GET ping
+GET {{host}}/{{apiPrefix}}/ping
+Accept: application/json
+
+### hello
+GET {{host}}/{{authApiPrefix}}/cms/hello
+Accept: application/json
+SID: "123"
+
+{
+  "name": "frank"
+}
+
+### 註冊
+GET {{host}}/{{apiPrefix}}/cms/register
+Accept: application/json
+
+{
+  "username": "frank",
+  "password": "frank",
+  "nickname": "frank"
+}
+
+### 登入
+GET {{host}}/{{apiPrefix}}/cms/login
+Accept: application/json
+
+{
+  "username": "frank",
+  "password": "frank"
+}

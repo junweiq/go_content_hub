@@ -1,0 +1,7 @@
+GET {{host}}/{{apiPrefix}}/cms/login
+Accept: application/json
+
+{
+  "username": "frank",
+  "password": "frank"
+}

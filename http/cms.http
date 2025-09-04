@@ -12,7 +12,7 @@ SID: "123"
 }
 
 ### 註冊
-GET {{host}}/{{apiPrefix}}/cms/register
+POST {{host}}/{{apiPrefix}}/cms/register
 Accept: application/json
 
 {
@@ -22,7 +22,7 @@ Accept: application/json
 }
 
 ### 登入
-GET {{host}}/{{apiPrefix}}/cms/login
+POST {{host}}/{{apiPrefix}}/cms/login
 Accept: application/json
 
 {

@@ -1,3 +1,0 @@
-### GET ping
-GET {{host}}/{{apiPrefix}}/ping
-Accept: application/json

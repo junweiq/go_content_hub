@@ -17,8 +17,8 @@ func CmsRouter(r *gin.Engine) {
 	api := r.Group(apiPrefix)
 	{
 		api.GET("ping", cmsApp.Ping)
-		api.GET("cms/register", cmsApp.Register)
-		api.GET("cms/login", cmsApp.Login)
+		api.POST("cms/register", cmsApp.Register)
+		api.POST("cms/login", cmsApp.Login)
 	}
 
 	authApi := r.Group(authApiPrefix).Use(session.Auth)

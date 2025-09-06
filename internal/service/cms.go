@@ -9,8 +9,8 @@ import (
 )
 
 type CmsApp struct {
-	db  *gorm.DB
-	rdb *redis.Client
+	Db  *gorm.DB
+	Rdb *redis.Client
 }
 
 func NewCmsApp() *CmsApp {
@@ -38,7 +38,7 @@ func connDB(app *CmsApp) {
 	mysqlDB = mysqlDB.Debug()
 	//}
 
-	app.db = mysqlDB
+	app.Db = mysqlDB
 }
 
 func connRdb(app *CmsApp) {
@@ -53,5 +53,5 @@ func connRdb(app *CmsApp) {
 		panic(err)
 	}
 
-	app.rdb = rdb
+	app.Rdb = rdb
 }

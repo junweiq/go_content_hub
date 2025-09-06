@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"go_content_hub/internal/dao"
+	"go_content_hub/internal/util"
 	"net/http"
 	"time"
 
@@ -30,7 +31,7 @@ func (c *CmsApp) Login(ctx *gin.Context) {
 		return
 	}
 
-	userDao := dao.NewUserDao(c.db)
+	userDao := dao.NewUserDao(c.Db)
 	user, err := userDao.FirstByUsername(req.Username)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -64,24 +65,24 @@ func (c *CmsApp) Login(ctx *gin.Context) {
 }
 
 func (c *CmsApp) generateSid(ctx *gin.Context, username string) (string, error) {
+	expiredTime := 8 * time.Hour
 	sid := uuid.New().String()
 
-	usidKey := "usid:" + username
-	err := c.rdb.Set(ctx, usidKey, sid, 8*time.Hour).Err()
+	sk := util.GetUserSidKey(username)
+	err := c.Rdb.Set(ctx, sk, sid, expiredTime).Err()
 	if err != nil {
-		fmt.Printf("generateSid() %s error [%v]", usidKey, err)
+		fmt.Printf("generateSid() %s error [%v]", sk, err)
 		return "", err
 	}
 
-	//sid create at
-	usidCaKey := "usid_ca:" + sid
-	err = c.rdb.Set(ctx, usidCaKey, time.Now().Unix(), 8*time.Hour).Err()
+	sck := util.GetUserSidCreateAtKey(sid)
+	err = c.Rdb.Set(ctx, sck, time.Now().Unix(), expiredTime).Err()
 	if err != nil {
-		fmt.Printf("generateSid() %s error [%v]", usidCaKey, err)
+		fmt.Printf("generateSid() %s error [%v]", sck, err)
 		return "", err
 	}
 
-	fmt.Println(usidKey + ", " + usidCaKey)
+	fmt.Println(sk + ", " + sck)
 
 	return sid, nil
 }

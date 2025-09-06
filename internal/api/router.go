@@ -13,7 +13,7 @@ const (
 
 func CmsRouter(r *gin.Engine) {
 	cmsApp := service.NewCmsApp()
-	session := NewSessionAuth()
+	session := NewSessionAuth(cmsApp.Rdb)
 	api := r.Group(apiPrefix)
 	{
 		api.GET("ping", cmsApp.Ping)

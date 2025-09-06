@@ -28,7 +28,7 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 		return
 	}
 
-	userDao := dao.NewUserDao(c.db)
+	userDao := dao.NewUserDao(c.Db)
 	isExist, err := userDao.CheckExist(req.Username)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

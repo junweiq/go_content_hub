@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const SessionKey = "SID"
+const SessionKey = "Sid"
 
 type SessionAuth struct{}
 
@@ -17,7 +17,7 @@ func NewSessionAuth() *SessionAuth {
 
 func (s *SessionAuth) Auth(ctx *gin.Context) {
 	sessionId := ctx.GetHeader(SessionKey)
-	//TODO SID 較驗
+	//TODO Sid 較驗
 	if sessionId == "" {
 		ctx.AbortWithStatusJSON(http.StatusForbidden, fmt.Sprintf("%s is null", SessionKey))
 	}

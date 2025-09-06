@@ -19,7 +19,7 @@ func (c *CmsApp) Hello(ctx *gin.Context) {
 	var req HelloReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

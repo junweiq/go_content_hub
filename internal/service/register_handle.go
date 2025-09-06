@@ -24,7 +24,7 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 	var req RegisterReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -35,7 +35,7 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 		return
 	}
 	if isExist {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "帳號已存在"})
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "帳號已存在"})
 		return
 	}
 

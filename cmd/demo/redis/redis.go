@@ -14,12 +14,12 @@ var ctx = context.Background()
 func main() {
 	rdb := connRdb()
 
-	err := rdb.Set(ctx, "SID:admin", "test", 5*time.Second).Err()
+	err := rdb.Set(ctx, "Sid:admin", "test", 5*time.Second).Err()
 	if err != nil {
 		panic(err)
 	}
 
-	SID, err := rdb.Get(ctx, "SID:admin").Result()
+	SID, err := rdb.Get(ctx, "Sid:admin").Result()
 	if err != nil && !errors.Is(err, redis.Nil) {
 		panic(err)
 	}

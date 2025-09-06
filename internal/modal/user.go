@@ -12,5 +12,5 @@ type User struct {
 }
 
 func (a User) TableName() string {
-	return "cms_user.account"
+	return "cms_user.t_user_detail"
 }

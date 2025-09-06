@@ -1,6 +1,6 @@
 CREATE DATABASE `cms_user`;
 
-CREATE TABLE `account` (
+CREATE TABLE `t_user_detail` (
     `id` int NOT NULL AUTO_INCREMENT COMMENT '主鍵ID',
     `username` varchar(64) DEFAULT '' COMMENT '用戶名',
     `password` varchar(64) DEFAULT '' COMMENT '密碼',

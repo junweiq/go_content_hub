@@ -16,9 +16,9 @@ POST {{host}}/{{apiPrefix}}/cms/register
 Accept: application/json
 
 {
-  "username": "frank",
-  "password": "frank",
-  "nickname": "frank"
+  "username": "admin",
+  "password": "admin.",
+  "nickname": "admin"
 }
 
 ### 登入
@@ -26,6 +26,6 @@ POST {{host}}/{{apiPrefix}}/cms/login
 Accept: application/json
 
 {
-  "username": "frank",
-  "password": "frank"
+  "username": "admin",
+  "password": "admin."
 }

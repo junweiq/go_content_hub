@@ -1,6 +1,8 @@
-CREATE DATABASE `cms_content`;
+CREATE DATABASE IF NOT EXISTS `go_cms`;
 
-CREATE TABLE `t_content_detail`
+USE `go_cms`;
+
+CREATE TABLE IF NOT EXISTS `content`
 (
     `id`              bigint    NOT NULL AUTO_INCREMENT COMMENT '主鍵ID',
     `title`           varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
@@ -18,4 +20,6 @@ CREATE TABLE `t_content_detail`
     `created_at`      timestamp NOT NULL                      DEFAULT CURRENT_TIMESTAMP,
     `updated_at`      timestamp NOT NULL                      DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='內容詳情';
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci COMMENT ='內容詳情';

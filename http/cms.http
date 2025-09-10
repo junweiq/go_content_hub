@@ -5,7 +5,7 @@ Accept: application/json
 ### hello
 GET {{host}}/{{authApiPrefix}}/cms/hello
 Accept: application/json
-sid: 95b6fd9b-1c8c-454f-be9e-525ab21254a8
+sid: {{sid}}
 
 {
   "name": "admin"
@@ -29,3 +29,5 @@ Accept: application/json
   "username": "admin",
   "password": "admin."
 }
+
+> {% client.global.set("sid", response.body.data.sid) %}

@@ -5,7 +5,6 @@ import (
 	"go_content_hub/internal/dao"
 	"go_content_hub/internal/modal"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
@@ -45,15 +44,13 @@ func (c *CmsApp) Register(ctx *gin.Context) {
 		return
 	}
 
-	nowTime := time.Now()
 	if err := userDao.Create(&modal.User{
-		Username:  req.Username,
-		Password:  hashedPassword,
-		Nickname:  req.Nickname,
-		CreatedAt: nowTime,
-		UpdatedAt: nowTime,
+		Username: req.Username,
+		Password: hashedPassword,
+		Nickname: req.Nickname,
 	}); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{

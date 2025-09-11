@@ -15,28 +15,30 @@ type SessionAuth struct {
 	Rdb redis.Client
 }
 
-func NewSessionAuth(Rdb *redis.Client) *SessionAuth {
+func NewAuthMiddleware(Rdb *redis.Client) *SessionAuth {
 	return &SessionAuth{
 		Rdb: *Rdb,
 	}
 }
 
-func (s *SessionAuth) Auth(ctx *gin.Context) {
-	sid := ctx.GetHeader(constant.SessionKey)
+func (s *SessionAuth) AuthMiddleware(ctx *gin.Context) {
+	sk := util.GetSessionKey()
+	sid := ctx.GetHeader(sk)
 
 	if sid == "" {
-		ctx.AbortWithStatusJSON(http.StatusForbidden, fmt.Sprintf("%s is null", constant.SessionKey))
+		ctx.AbortWithStatusJSON(http.StatusForbidden, fmt.Sprintf("%s is null", sk))
 		return
 	}
 
+	sk := util.GetSessionKey()
 	sck := util.GetUserSidCreateAtKey(sid)
 	loginTime, err := s.Rdb.Get(ctx, sck).Result()
 	if err != nil && !errors.Is(err, redis.Nil) {
-		ctx.AbortWithStatusJSON(http.StatusInternalServerError, fmt.Sprintf("%s auth error", constant.SessionKey))
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, fmt.Sprintf("%s auth error", sk))
 		return
 	}
 	if loginTime == "" {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, fmt.Sprintf("%s auth fail", constant.SessionKey))
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, fmt.Sprintf("%s auth fail", sk))
 		return
 	}
 

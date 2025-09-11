@@ -3,10 +3,12 @@
 
 ```text
 cmd      main包
+http
 internal 內部實現邏輯
   api
   cache
   config
+  constant
   dao
   modal
   service

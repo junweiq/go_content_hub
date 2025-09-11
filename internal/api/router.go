@@ -13,16 +13,17 @@ const (
 
 func CmsRouter(r *gin.Engine) {
 	cmsApp := service.NewCmsApp()
-	session := NewSessionAuth(cmsApp.Rdb)
+	session := NewAuthMiddleware(cmsApp.Rdb)
 	api := r.Group(apiPrefix)
 	{
-		api.GET("ping", cmsApp.Ping)
-		api.POST("cms/register", cmsApp.Register)
-		api.POST("cms/login", cmsApp.Login)
+		api.GET("ping", cmsApp.PingHandle)
+		api.POST("cms/register", cmsApp.RegisterHandle)
+		api.POST("cms/login", cmsApp.LoginHandle)
 	}
 
-	authApi := r.Group(authApiPrefix).Use(session.Auth)
+	authApi := r.Group(authApiPrefix).Use(session.AuthMiddleware)
 	{
-		authApi.GET("cms/hello", cmsApp.Hello)
+		authApi.GET("cms/hello", cmsApp.HelloHandle)
+		authApi.GET("cms/content/create", cmsApp.ContentCreateHandle)
 	}
 }

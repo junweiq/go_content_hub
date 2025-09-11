@@ -10,17 +10,17 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type RegisterReq struct {
+type RegisterHandleReq struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 	Nickname string `json:"nickname" binding:"required"`
 }
 
-type RegisterRes struct {
+type RegisterHandleRes struct {
 }
 
-func (c *CmsApp) Register(ctx *gin.Context) {
-	var req RegisterReq
+func (c *CmsApp) RegisterHandle(ctx *gin.Context) {
+	var req RegisterHandleReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})

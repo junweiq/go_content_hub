@@ -12,19 +12,19 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type LoginReq struct {
+type LoginHandleReq struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
-type LoginRes struct {
+type LoginHandleRes struct {
 	Sid      string `json:"sid"`
 	Username string `json:"username"`
 	Nickname string `json:"nickname"`
 }
 
-func (c *CmsApp) Login(ctx *gin.Context) {
-	var req LoginReq
+func (c *CmsApp) LoginHandle(ctx *gin.Context) {
+	var req LoginHandleReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -56,7 +56,7 @@ func (c *CmsApp) Login(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "ok",
-		"data": &LoginRes{
+		"data": &LoginHandleRes{
 			Sid:      sid,
 			Username: user.Username,
 			Nickname: user.Nickname,

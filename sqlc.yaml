@@ -1,9 +1,0 @@
-version: "2"
-sql:
-  - engine: "mysql" # 使用 mysql
-    queries: "internal/sql/user.sql" # 查詢定義的文件
-    schema: "internal/sql/schema.sql" # Schema 定義 (如有多表，可以完整定義)
-    gen:
-      go:
-        package: "dao" # 生成代碼的包名
-        out: "internal/dao" # 生成代碼的存放路徑

@@ -7,16 +7,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type HelloHandleReq struct {
+type ContentCreateHandleReq struct {
 	Name string `json:"name" binding:"required"`
 }
 
-type HelloHandleRes struct {
+type ContentCreateHandleRes struct {
 	Message string `json:"message" binding:"required"`
 }
 
-func (c *CmsApp) HelloHandle(ctx *gin.Context) {
-	var req HelloHandleReq
+func (c *CmsApp) ContentCreateHandle(ctx *gin.Context) {
+	var req ContentCreateHandleReq
 
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -26,7 +26,7 @@ func (c *CmsApp) HelloHandle(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "ok",
-		"data": &HelloHandleRes{
+		"data": &ContentCreateHandleRes{
 			Message: fmt.Sprintf("hello %s", req.Name),
 		},
 	})
